@@ -39,6 +39,7 @@ public class ExtFlightDelaysDAO {
 		}
 	}
 
+							//passo l'Identity MAP da riempire 
 	public void loadAllAirports(Map<Integer, Airport> idMap) {
 		String sql = "SELECT * FROM airports";
 
@@ -49,6 +50,7 @@ public class ExtFlightDelaysDAO {
 
 			while (rs.next()) {
 				
+				//per ogni ID controllo che non sia già presente nella mappa
 				if(!idMap.containsKey(rs.getInt("ID"))) {
 					Airport airport = new Airport(rs.getInt("ID"), rs.getString("IATA_CODE"), rs.getString("AIRPORT"),
 						rs.getString("CITY"), rs.getString("STATE"), rs.getString("COUNTRY"), rs.getDouble("LATITUDE"),
@@ -95,7 +97,13 @@ public class ExtFlightDelaysDAO {
 		}
 	}
 	
+	
+	//mi porto dietro l'id map per controllare che tt gli aeroporti del DB
+	//siano presenti nella mappa
+	
 	public List<Rotta> getRotte(Map<Integer,Airport> aIdMap, int distanzaMedia){
+		//faccio una media delle distanze di tutti i voli tra i due aeroporti
+		//prendo solo qll con media>di un certo valore
 		String sql = "SELECT ORIGIN_AIRPORT_ID as id1, DESTINATION_AIRPORT_ID as id2, AVG(DISTANCE) as avgg " + 
 				"FROM flights " + 
 				"GROUP BY ORIGIN_AIRPORT_ID, DESTINATION_AIRPORT_ID " + 

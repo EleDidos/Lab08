@@ -1,5 +1,9 @@
 /**
  * Sample Skeleton for 'Scene.fxml' Controller Class
+
+	VERTICI sono solo alcuni AREOPORTI
+	ROTTE/ARCHI sono solo alcuni VOLI
+
  */
 
 package it.polito.tdp.extflightdelays;
